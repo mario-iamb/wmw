@@ -107,3 +107,8 @@
   margin: 0;
   clip: auto;
 }
+
+@mixin type($font-size, $line-height: 1.5em) {
+  font-size: rem($font-size * 1px);
+  line-height: rem($line-height * 1px);
+}
