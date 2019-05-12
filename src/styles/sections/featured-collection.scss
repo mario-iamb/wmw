@@ -32,10 +32,14 @@
 
     &__carousel {
         width: rem(1300px);
-        margin-bottom: rem(80px);
+        margin-bottom: rem(70px);
 
         @media only screen and (max-width: 1300px) {
             width: 90%;
+        }
+
+        @include media-query($small) {
+            margin-bottom: rem(50px);
         }
     }
 
@@ -56,6 +60,20 @@
         @media only screen and (max-width: 576px) {
             width: 100%;
         }
+
+        &:hover {
+            .featured-collection__product-image img {
+                @include media-query($medium-up) {
+                    opacity: .7;
+                }
+            }
+
+            .add-to-Cart {
+                @include media-query($medium-up) {
+                    display: block;
+                }
+            }
+        }
     }
 
     &__product-info {
@@ -70,6 +88,7 @@
         img {
             width: 100%;
             height: auto;
+            transition: opacity $transition-duration $transition-timing;
         }
 
         .add-to-Cart {
@@ -87,14 +106,6 @@
 
             @include media-query($medium-up) {
                 display: none;
-            }
-        }
-
-        &:hover {
-            .add-to-Cart {
-                @include media-query($medium-up) {
-                    display: block;
-                }
             }
         }
     }
@@ -116,7 +127,6 @@
         font-weight: $font-body-bold-weight;
         color: $color-light-blue;
         margin: 0 0 rem(10px) 0;
-        // transition: all $transition-duration $transition-timing;
     }
 
     &__product-price {
@@ -146,6 +156,10 @@
         &-button {
             &:hover {
                 background-color: transparent;
+
+                .flickity-button-icon {
+                    fill: $color-light-blue;
+                }
             }
         }
 

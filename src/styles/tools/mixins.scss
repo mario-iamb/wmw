@@ -114,7 +114,7 @@
 }
 
 @mixin collection-title {
-  @include type(48,49);
+  @include type(40,49);
 
   @include media-query($small) {
     @include type(28,34);

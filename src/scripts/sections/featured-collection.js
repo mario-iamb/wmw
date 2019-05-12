@@ -9,6 +9,7 @@
 import {register} from '@shopify/theme-sections';
 import 'flickity/dist/flickity.min.css';
 import Flickity from 'flickity';
+import $ from 'jquery';
 
 /**
  * Featured collection constructor
@@ -26,7 +27,6 @@ register('featured-collection', {
       containe: true,
       groupCells: true,
       imagesLoaded: true,
-      freeScroll: true,
       wrapAround: true,
       arrowShape: { 
         x0: 25,
@@ -34,6 +34,38 @@ register('featured-collection', {
         x2: 75, y2: 40,
         x3: 35
       },
+    });
+  },
+
+  quickAdd() {
+    const quickAddCta = $('.add-to-Cart');
+    quickAddCta.on('click', function(e){
+      e.preventDefault();
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add.js',
+        data: {
+          quantity: 1,
+          id: $(this).data('variant-id')
+        },
+        dataType: 'json',
+        success: function() {
+          $.ajax({
+            type: 'GET',
+            url: '/cart.js',
+            dataType: 'json',
+            success: function(cart) {
+              $('.site-header__cart span').text('(' + cart.item_count + ')'); 
+            },
+            error: function() {
+              console.log('something wrong');
+            }
+          })
+        },
+        error: function() {
+          console.log('something wrong');
+        }
+      })
     });
   },
 
@@ -49,6 +81,7 @@ register('featured-collection', {
   onLoad() {
     // Do something when a section instance is loaded
     this.init();
+    this.quickAdd();
   },
 
   // Shortcut function called when a section unloaded by the Theme Editor 'shopify:section:unload' event.
