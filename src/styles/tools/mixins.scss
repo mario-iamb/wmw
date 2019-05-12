@@ -112,3 +112,43 @@
   font-size: rem($font-size * 1px);
   line-height: rem($line-height * 1px);
 }
+
+@mixin collection-title {
+  @include type(48,49);
+
+  @include media-query($small) {
+    @include type(28,34);
+  }
+}
+
+@mixin collection-description {
+  @include type(18,26);
+
+  @include media-query($small) {
+    @include type(14,21);
+  }
+}
+
+@mixin product-title {
+  @include type(21,26);
+
+  @include media-query($small) {
+    @include type(18,23);
+  }
+}
+
+@mixin product-price {
+  @include type(18,26);
+
+  @include media-query($small) {
+    @include type(18,18);
+  }
+}
+
+@mixin cta-ViewAll {
+  @include type(18,23);
+
+  @include media-query($small) {
+    @include type(14,17);
+  }
+}

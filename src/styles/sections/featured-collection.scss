@@ -5,5 +5,190 @@
  *
  */
 .featured-collection {
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: rem(150px);
+
+    &__title {
+        @include collection-title;
+        color: $color-light-blue;
+        text-align: center;
+        margin-bottom: 21px;
+    }
+
+    &__description {
+        @include collection-description;
+        max-width: rem(651px);
+        color: $color-light-grey;
+        padding: 0 rem(20px);
+        margin: 0 auto rem(40px);
+        text-align: center;
+
+        @include media-query($small) {
+            margin: 0 auto rem(30px);
+        }
+    }
+
+    &__carousel {
+        width: rem(1300px);
+        margin-bottom: rem(80px);
+
+        @media only screen and (max-width: 1300px) {
+            width: 90%;
+        }
+    }
+
+    &__product {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        width: 25%;
+
+        @include media-query($medium-down) {
+            width: calc(100% / 3);
+        }
+
+        @include media-query($small) {
+            width: 50%;
+        }
+
+        @media only screen and (max-width: 576px) {
+            width: 100%;
+        }
+    }
+
+    &__product-info {
+        width: 94%;
+        align-self: center;
+    }
+
+    &__product-image {
+        margin-bottom: rem(10px);
+        position: relative;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        .add-to-Cart {
+            @include type(18,23);
+            font-weight: $font-body-bold-weight;
+            color: $color-light-blue;
+            padding: rem(12px) 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: rem(18px);
+            width: 90%;
+            text-align: center;
+            background-color: $color-white;
+
+            @include media-query($medium-up) {
+                display: none;
+            }
+        }
+
+        &:hover {
+            .add-to-Cart {
+                @include media-query($medium-up) {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &__product-title {
+        @include product-title;
+        font-weight: $font-body-bold-weight;
+        color: $color-light-blue;
+        margin: 0 0 rem(10px) 0;
+        // transition: all $transition-duration $transition-timing;
+    }
+
+    &__product-price {
+        @include product-price;
+        color: $color-light-grey;
+    }
+
+    &__cta {
+        @include cta-ViewAll;
+        font-weight: $font-body-bold-weight;
+        padding: rem(16px) rem(22px);
+        color: $color-white;
+        background-color: $color-light-blue;
+        text-decoration: none;
+        transition: all $transition-duration $transition-timing;
+
+        @include media-query($small) {
+            padding: rem(9px) rem(12px);
+        }
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+    .flickity {
+        &-button {
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        &-prev-next-button {
+            border-radius: 0;
+            background-color: transparent;
+
+            &.previous {
+                left: rem(-50px);
+
+                @include media-query($medium-down) {
+                    left: rem(-40px);
+                }
+
+                @media only screen and (max-width: 576px) {
+                    display: none;
+                }
+            }
+    
+            &.next {
+                right: rem(-50px);
+
+                @include media-query($medium-down) {
+                    right: rem(-40px);
+                }
+
+                @media only screen and (max-width: 576px) {
+                    display: none;
+                }
+            }
+
+            .flickity-button-icon {
+                width: 80%;
+                height: 80%;
+                left: 10%;
+                top: 10%;
+            }
+        }
+
+        &-button-icon {
+            fill: $color-dark-grey;
+        }
+
+        &-page-dots {
+            .dot {
+                width: rem(7px);
+                height: rem(7px);
+                background: $color-light-grey-2;
+                margin: 0 rem(6px);
+                opacity: 1;
+
+                &.is-selected {
+                    background: $color-grey;
+                }
+            }
+        }
+    }
 }

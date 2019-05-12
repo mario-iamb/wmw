@@ -9,31 +9,35 @@
 <section class="featured-collection" data-section-id="{{ section.id }}" data-section-type="featured-collection">
   {%- assign collection = collections[section.settings.collection] -%}
 
-  <h2>{{ collection.title | escape }}</h2>
+  <h2 class="featured-collection__title">{{ collection.title | escape }}</h2>
+  <p class="featured-collection__description">{{ collection.description }}</p>
 
-  <p>{{ collection.description }}</p>
+  <div class="featured-collection__carousel">
+    {% for product in collection.products limit: 6 %}
+      {% assign current_variant = product.selected_or_first_available_variant %}
+    
+      <a class="featured-collection__product" href="{{ product.url | within: collection }}">
+        <div class="featured-collection__product-info">
+          <div class="featured-collection__product-image">
+            {% if product.featured_image != blank %}
+              {{ product.featured_image | img_url: 'large' | img_tag }}
+            {% endif %}
+            
+            <span class="add-to-Cart" js-ajax-cart="addToCart" data-variant-id="{{ current_variant.id }}" data-quantity="1">Add to cart</span>
+          </div>
 
-  {% for product in collection.products limit: 6 %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
-  
-    <a href="{{ product.url | within: collection }}">
-      <div>
-        {% if product.featured_image != blank %}
-          {{ product.featured_image | img_url: 'large' | img_tag }}
-        {% endif %}
-        
-        <span js-ajax-cart="addToCart" data-variant-id="{{ current_variant.id }}" data-quantity="1">Add to cart</span>
-      </div>
+          <div class="featured-collection__product-description">
+            <p class="featured-collection__product-title">{{ product.title | escape }}</p>
+            <span class="featured-collection__product-price">
+              {% include 'product-price' %}
+            </span>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 
-      <div>
-        <p>{{ product.title | escape }}</p>
-
-        <span>
-          {% include 'product-price' %}
-        </span>
-      </div>
-    </a>
-  {% endfor %}
+  <a class="featured-collection__cta" href="#">View collection</a>
 </section>
 
 {% schema %}
