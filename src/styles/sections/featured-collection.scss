@@ -99,6 +99,18 @@
         }
     }
 
+    &__product-tag {
+        @include type(14,17);
+        font-weight: $font-body-bold-weight;
+        color: $color-white;
+        background-color: $color-light-blue;
+        padding: rem(5px) rem(10px);
+        position: absolute;
+        top: rem(10px);
+        right: rem(10px);
+        
+    }
+
     &__product-title {
         @include product-title;
         font-weight: $font-body-bold-weight;
